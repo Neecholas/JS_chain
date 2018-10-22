@@ -5,7 +5,8 @@ class Block{
     //creates the four instance variables, with previousHash auto set
     this.index = index;
     this.data = data;
-    this.timestamp = new Date().format('m-d-Y h:i:s');
+    timestamp = new Date();
+    this.timestamp = timestamp;
     this.previousHash = previousHash;
     this.hash = '';
   }
@@ -39,12 +40,13 @@ class Blockchain{
     //calculates the unique hash of the latest block
     newBlock.hash = newBlock.calculateHash();
     //pushes it onto the blockchain list
-    this chain.push(newBlock);
+    this.chain.push(newBlock);
   }
 }
 
 //test space
-let nickCoin = new Blockchain();
-console.log(nickCoin.chain);
+// let nickCoin = new Blockchain();
+// console.log(nickCoin.chain);
+
 
 
