@@ -18,4 +18,21 @@ class Block{
   }
 }
 
+class Blockchain{
+  constructor(){
+    //set the chain as a list that contains the genesis block
+    this.chain = [this.createGenesisBlock];
+  }
+  //manually create the first block, the 'genesis' block
+  createGenesisBlock(){
+    return new Block(0, "22/10/2018", "First block", "0");
+  }
+
+  getLatestBlock(){
+
+  }
+
+  addBlock()
+}
+
 
