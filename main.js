@@ -168,12 +168,29 @@ class Blockchain{
     //pushes it onto the blockchain list
     this.chain.push(newBlock);
   }
+  //create a method to validate the blockchain
+  isChainValid(){
+    for(let i = 1; i < this.chain.length; i++){
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
+      if(currentBlock.hash !== currentBlock.calculateHash()){
+        return false;
+      }
+      if(currentBlock.previousHash !== previousBlock.hash){
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 //test space
 let nickCoin = new Blockchain();
-// nickCoin.addBlock(new Block(1, { amount: 4 }));
-// nickCoin.addBlock(new Block(2, { amount: 5 }));
+nickCoin.addBlock(new Block(1, { amount: 4 }));
+nickCoin.addBlock(new Block(2, { amount: 5 }));
+
+console.log(nickCoin.isChainValid());
 
 console.log(JSON.stringify(nickCoin, null, 4));
 
