@@ -1,7 +1,7 @@
 //create a class for the block
 //REMEMBER: JS uses lowerCamelcase, not snake_case like C, python and Ruby!!!
 class Block{
-  constructor{index, data, previousHash = ''}{
+  constructor(index, data, previousHash = ''){
     //creates the four instance variables, with previousHash auto set
     this.index = index;
     this.data = data;
@@ -45,5 +45,6 @@ class Blockchain{
 
 //test space
 let nickCoin = new Blockchain();
+console.log(nickCoin.chain);
 
 
