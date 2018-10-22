@@ -1,4 +1,3 @@
-
 //create a class for the block
 //REMEMBER: JS uses lowerCamelcase, not snake_case like C, python and Ruby!!!
 class Block{
@@ -13,7 +12,7 @@ class Block{
 
   calculateHash(){
     //creates a unique hash based on the index, timestamp, block data and previous hash
-    //this stops
+    //uses the sha256 algorithm to digest the data into a unique id
     return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
   }
 }
@@ -35,7 +34,12 @@ class Blockchain{
   }
 
   addBlock(newBlock){
-    newBlock.previousHash = this.getLatestBlock.calculateHash;
+    //sets the previous hash property of the block to the hash of the last block
+    newBlock.previousHash = this.getLatestBlock().hash;
+    //calculates the unique hash of the latest block
+    newBlock.hash = newBlock.calculateHash();
+    //pushes it onto the blockchain list
+    this chain.push(newBlock);
   }
 }
 
