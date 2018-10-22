@@ -1,11 +1,11 @@
 //create a class for the block
 //REMEMBER: JS uses lowerCamelcase, not snake_case like C, python and Ruby!!!
 class Block{
-  constructor{index, timestamp, data, previousHash = ''}{
+  constructor{index, data, previousHash = ''}{
     //creates the four instance variables, with previousHash auto set
     this.index = index;
     this.data = data;
-    this.timestamp = timestamp;
+    this.timestamp = new Date().format('m-d-Y h:i:s');
     this.previousHash = previousHash;
     this.hash = '';
   }
@@ -24,7 +24,7 @@ class Blockchain{
   }
   //manually create the first block, the 'genesis' block
   createGenesisBlock(){
-    return new Block(0, "22/10/2018", "First block", "0");
+    return new Block(0, "First block", "0");
   }
 
   getLatestBlock(){
@@ -42,5 +42,8 @@ class Blockchain{
     this chain.push(newBlock);
   }
 }
+
+//test space
+let nickCoin = new Blockchain();
 
 
