@@ -124,6 +124,8 @@ function SHA256(s){
  return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
 }
 
+//Here is where the blockchain code begins
+
 class Block{
   constructor(index, data, previousHash = ''){
     //creates the four instance variables, with previousHash auto set
@@ -132,7 +134,7 @@ class Block{
     let timestamp = new Date();
     this.timestamp = timestamp;
     this.previousHash = previousHash;
-    this.hash = '';
+    this.hash = this.calculateHash();
   }
 
   calculateHash(){
@@ -145,7 +147,7 @@ class Block{
 class Blockchain{
   constructor(){
     //set the chain as a list that contains the genesis block
-    this.chain = [this.createGenesisBlock];
+    this.chain = [this.createGenesisBlock()];
   }
   //manually create the first block, the 'genesis' block
   createGenesisBlock(){
@@ -170,8 +172,8 @@ class Blockchain{
 
 //test space
 let nickCoin = new Blockchain();
-nickCoin.addBlock(new Block(1, { amount: 4 }));
-nickCoin.addBlock(new Block(2, { amount: 5 }));
+// nickCoin.addBlock(new Block(1, { amount: 4 }));
+// nickCoin.addBlock(new Block(2, { amount: 5 }));
 
 console.log(JSON.stringify(nickCoin, null, 4));
 
