@@ -29,10 +29,14 @@ class Blockchain{
   }
 
   getLatestBlock(){
-
+    //returns the last element of the blockchain list
+    //this will be important for getting the hash we need to point to to create a new block
+    return this.chain[this.chain.length - 1];
   }
 
-  addBlock()
+  addBlock(newBlock){
+    newBlock.previousHash = this.getLatestBlock.calculateHash;
+  }
 }
 
 
