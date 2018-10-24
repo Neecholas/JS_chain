@@ -135,18 +135,21 @@ class Block{
     this.timestamp = timestamp;
     this.previousHash = previousHash;
     this.hash = this.calculateHash();
+    this.nonce = 0;
   }
 
   calculateHash(){
     //creates a unique hash based on the index, timestamp, block data and previous hash
     //uses the sha256 algorithm to digest the data into a unique id
-    return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
+    return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data) + this.nonce).toString();
   }
 
   mineBlock(difficulty){
     while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){
+      this.nonce ++;
       this.hash = this.calculateHash();
     }
+    console.log("Block mined: " + this.hash);
   }
 }
 
@@ -154,6 +157,7 @@ class Blockchain{
   constructor(){
     //set the chain as a list that contains the genesis block
     this.chain = [this.createGenesisBlock()];
+    this.difficulty = 5;
   }
   //manually create the first block, the 'genesis' block
   createGenesisBlock(){
@@ -170,7 +174,7 @@ class Blockchain{
     //sets the previous hash property of the block to the hash of the last block
     newBlock.previousHash = this.getLatestBlock().hash;
     //calculates the unique hash of the latest block
-    newBlock.hash = newBlock.calculateHash();
+    newBlock.mineBlock(this.difficulty);
     //pushes it onto the blockchain list
     this.chain.push(newBlock);
   }
@@ -193,10 +197,11 @@ class Blockchain{
 
 //test space
 let nickCoin = new Blockchain();
+console.log("mining block 1...");
 nickCoin.addBlock(new Block(1, { amount: 4 }));
+console.log("mining block 2...");
 nickCoin.addBlock(new Block(2, { amount: 5 }));
 
-console.log(nickCoin.isChainValid());
 
 console.log(JSON.stringify(nickCoin, null, 4));
 
