@@ -142,6 +142,12 @@ class Block{
     //uses the sha256 algorithm to digest the data into a unique id
     return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
   }
+
+  mineBlock(difficulty){
+    while(this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){
+      this.hash = this.calculateHash();
+    }
+  }
 }
 
 class Blockchain{
