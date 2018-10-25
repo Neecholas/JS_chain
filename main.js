@@ -186,8 +186,13 @@ class Blockchain{
     this.chain.push(block);
 
     this.pendingTransactions = [
+      //gives a transaction with no from address to the miner
       new Transaction(null, miningRewardAddress, this.miningReward);
     ];
+  }
+
+  createTransaction(transaction){
+    this.pendingTransactions.push(transaction);
   }
   //create a method to validate the blockchain
   isChainValid(){
