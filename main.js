@@ -165,6 +165,8 @@ class Blockchain{
     //set the chain as a list that contains the genesis block
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 4;
+    this.pendingTransactions = [];
+    this.miningReward = 100;
   }
   //manually create the first block, the 'genesis' block
   createGenesisBlock(){
@@ -177,13 +179,15 @@ class Blockchain{
     return this.chain[this.chain.length - 1];
   }
 
-  addBlock(newBlock){
-    //sets the previous hash property of the block to the hash of the last block
-    newBlock.previousHash = this.getLatestBlock().hash;
-    //calculates the unique hash of the latest block
-    newBlock.mineBlock(this.difficulty);
-    //pushes it onto the blockchain list
-    this.chain.push(newBlock);
+  minePendingTransactions(miningRewardAddress){
+    let block = new Block(this.pendingTransactions);
+    block.mineBlock(this.difficulty);
+    console.log("Block sucessfully mined");
+    this.chain.push(block);
+
+    this.pendingTransactions = [
+      new Transaction(null, miningRewardAddress, this.miningReward);
+    ];
   }
   //create a method to validate the blockchain
   isChainValid(){
