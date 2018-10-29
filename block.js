@@ -109,7 +109,15 @@ class Blockchain{
     ];
   }
 
-  createTransaction(transaction){
+  addTransaction(transaction) {
+    if(!transaction.fromAddress || !transaction.toAddress){
+      throw new Error("Transaction must have from and to address");
+    }
+
+    if(!transaction.isReal()){
+      throw new Error("This is not a valid transaction");
+    }
+
     this.pendingTransactions.push(transaction);
   }
 

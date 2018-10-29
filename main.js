@@ -1,5 +1,7 @@
 const {Blockchain, Transaction} = require('./block');
-
+var EC = require('elliptic').ec;
+// creates a new elliptic curve using the secp256k1 algorithm
+const ec = new EC('secp256k1');
 
 //test space
 let nickCoin = new Blockchain();
