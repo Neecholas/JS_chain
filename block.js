@@ -2,6 +2,9 @@
 // REMEMBER: JS uses lowerCamelcase, not snake_case like C, python and Ruby!!!
 // pull in the sha256 hashing algorithm
 const SHA256 = require('crypto-js/sha256');
+var EC = require('elliptic').ec;
+// creates a new elliptic curve using the secp256k1 algorithm
+const ec = new EC('secp256k1');
 
 class Block{
   constructor(transactions, previousHash = ''){
@@ -26,6 +29,16 @@ class Block{
       this.hash = this.calculateHash();
     }
     console.log("Block mined: " + this.hash);
+  }
+
+  hasValidTransaction(){
+    for(const tx = this.transactions){
+      if(!tx.isReal()){
+        return false;
+      }
+    }
+
+    return true;
   }
 }
 
