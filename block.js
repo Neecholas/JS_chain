@@ -55,7 +55,7 @@ class Transaction {
 
   signTransaction(keySign){
     if(signingKey.getPublic('hex') !== this.fromAddress){
-      throw new Error('You cannot sign transactions for orther wallets!');
+      throw new Error('You cannot sign transactions for other wallets!');
     }
 
     const hashTran = this.calculateHash();
