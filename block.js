@@ -32,7 +32,7 @@ class Block{
   }
 
   hasValidTransaction(){
-    for(const tx = this.transactions){
+    for(const tx in this.transactions){
       if(!tx.isReal()){
         return false;
       }
@@ -49,12 +49,12 @@ class Transaction {
     this.amount = amount;
   }
 
-  caclculateHash() {
+  calculateHash() {
     return SHA256(this.fromAddress + this.toAddress + this.amount).toString();
   }
 
   signTransaction(keySign){
-    if(signingKey.getPublic('hex') !== this.fromAddress){
+    if(keySign.getPublic('hex') !== this.fromAddress){
       throw new Error('You cannot sign transactions for other wallets!');
     }
 

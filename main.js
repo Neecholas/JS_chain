@@ -9,18 +9,10 @@ const myWalletAddress = myKey.getPublic('hex')
 let nickCoin = new Blockchain();
 
 const tx1 = new Transaction(myWalletAddress, 'public key goes here', 10);
-tx1.signTransaction(myKey)
+tx1.signTransaction(myKey);
+nickCoin.addTransaction(tx1);
 
-nickCoin.createTransaction(new Transaction("address1", "address2", 10));
-nickCoin.createTransaction(new Transaction("address1", "address2", 5));
-
-nickCoin.minePendingTransactions("Nick-address");
-nickCoin.minePendingTransactions("Nick-address");
-nickCoin.minePendingTransactions("Nick-address");
-console.log(nickCoin.getBalanceOfAddress("Nick-address"));
-
-
-
+nickCoin.minePendingTransactions(myWalletAddress);
 
 console.log(JSON.stringify(nickCoin, null, 4));
 
